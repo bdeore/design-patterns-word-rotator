@@ -6,7 +6,15 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+# IntelliJ Idea specific
 /.idea/
 /wordPlay/src/BUILD/
 /out/production/Assignment1/
 /Assignment1.iml
+# Test Files
+/wordPlay/metrics.txt
+/wordPlay/input.txt
+/wordPlay/output.txt
+/output.txt
+/metrics.txt
+/input.txt
