@@ -1,8 +1,9 @@
 package wordPlay.driver;
 
-import java.util.Vector;
+import wordPlay.handler.WordRotator;
 import wordPlay.metrics.MetricsCalculator;
 import wordPlay.util.FileProcessor;
+import wordPlay.util.Results;
 
 /** @author Bhagwan Deore */
 public class Driver {
@@ -23,40 +24,24 @@ public class Driver {
     System.out.println("Hello World! Lets get started with the assignment");
 
     try {
-      System.out.println(args[0]);
       FileProcessor fp = new FileProcessor(args[0]);
+      MetricsCalculator metrics = new MetricsCalculator();
+      Results rs = new Results();
 
-      String temp = fp.poll();
-      while (temp != null) {
-        System.out.println(temp);
-        temp = fp.poll();
+      WordRotator wr = new WordRotator(fp, metrics, rs);
+      wr.processFile();
+      metrics.printVector();
+
+      for (String s : rs.getResultBuffer()) {
+        System.out.println(s);
       }
+
+      System.out.println(metrics.getAvgWordsPerSentence());
+      System.out.println(metrics.getAvgWordLength());
 
     } catch (Exception e) {
       System.out.println("exception occurred in FileProcessor class");
       e.printStackTrace();
     }
-
-    Vector<Integer> vec = new Vector<Integer>();
-    vec.add(7);
-    vec.add(2);
-    vec.add(6);
-    vec.add(8);
-    vec.add(6);
-    vec.add(4);
-    MetricsCalculator newTest = new MetricsCalculator();
-    newTest.addLineStats(0, vec);
-
-    vec = new Vector<Integer>();
-    vec.add(5);
-    vec.add(7);
-    vec.add(2);
-    vec.add(4);
-    vec.add(10);
-    vec.add(7);
-    newTest.addLineStats(1, vec);
-    newTest.printVector();
-    System.out.println(newTest.getAvgWordsPerSentence());
-    System.out.println(newTest.getAvgWordLength());
   }
 }
