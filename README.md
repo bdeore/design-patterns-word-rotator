@@ -1,5 +1,5 @@
 # CSX42: Assignment 1
-## Name: 
+## Name: Bhagwan Sanjay Deore
 
 -----------------------------------------------------------------------
 -----------------------------------------------------------------------
@@ -45,6 +45,6 @@ I am involved in plagiarism or cheating an official form will be
 submitted to the Academic Honesty Committee of the Watson School to
 determine the action that needs to be taken. "
 
-Date: [ADD_DATE_HERE]
+Date: June 6, 2020
 
 
