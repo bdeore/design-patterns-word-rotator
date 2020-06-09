@@ -7,7 +7,7 @@ public class MetricsCalculator {
   private double avgWordsPerSentence;
   private double avgWordLength;
 
-  private Vector<Vector<Integer>> metrics;
+  private final Vector<Vector<Integer>> metrics;
 
   public MetricsCalculator() {
     this.avgWordsPerSentence = 0;

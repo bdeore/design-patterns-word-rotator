@@ -26,18 +26,14 @@ public class Driver {
     try {
       FileProcessor fp = new FileProcessor(args[0]);
       MetricsCalculator metrics = new MetricsCalculator();
-      Results rs = new Results();
+      Results rs = new Results(metrics);
 
       WordRotator wr = new WordRotator(fp, metrics, rs);
       wr.processFile();
       metrics.printVector();
 
-      for (String s : rs.getResultBuffer()) {
-        System.out.println(s);
-      }
-
-      System.out.println(metrics.getAvgWordsPerSentence());
-      System.out.println(metrics.getAvgWordLength());
+      rs.write();
+      rs.write("output.txt", "metrics.txt");
 
     } catch (Exception e) {
       System.out.println("exception occurred in FileProcessor class");

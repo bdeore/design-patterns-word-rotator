@@ -24,7 +24,7 @@ public class WordRotator {
 
       while (word != null) {
         if (!word.equals("")) {
-          if (word.charAt((word.length()) - 1) == '.') {
+          if (word.charAt((word.length()) - 1) == '.' || word.equals("\n")) {
             word = word.substring(0, word.length() - 1);
             word = rotate(word, wordCount);
             lineStats.add(word.length());
@@ -32,10 +32,11 @@ public class WordRotator {
 
             metrics.addLineStats(lineCount, lineStats);
             rs.store(line);
+
             line = "";
-            lineCount++;
             lineStats = new Vector<>();
             wordCount = 0;
+            lineCount++;
 
           } else {
             word = rotate(word, wordCount);
@@ -44,7 +45,7 @@ public class WordRotator {
           }
           wordCount++;
         }
-          word = fp.poll();
+        word = fp.poll();
       }
     } catch (Exception e) {
       System.out.println(
@@ -56,7 +57,7 @@ public class WordRotator {
   private String rotate(String original, int rotation) {
     char[] temp = new char[original.length()];
 
-    if (original.length() == rotation) {
+    if (original.length() % rotation == 0) {
       return original;
     } else {
       for (int i = 0; i < original.length(); i++) {
