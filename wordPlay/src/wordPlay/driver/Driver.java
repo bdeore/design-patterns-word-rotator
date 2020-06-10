@@ -1,5 +1,8 @@
 package wordPlay.driver;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.InvalidPathException;
 import wordPlay.handler.WordRotator;
 import wordPlay.metrics.MetricsCalculator;
 import wordPlay.util.FileProcessor;
@@ -35,9 +38,15 @@ public class Driver {
       rs.write();
       rs.write("output.txt", "metrics.txt");
 
-    } catch (Exception e) {
-      System.out.println("exception occurred in FileProcessor class");
+    } catch (InvalidPathException | FileNotFoundException | SecurityException e) {
+      System.out.println(e);
+      System.out.println("(Class Driver) Terminating Program");
       e.printStackTrace();
+      System.exit(1);
+    } catch (IOException e) {
+      System.out.println("IOException occurred in FileProcessor class\n" + e);
+      e.printStackTrace();
+      System.exit(1);
     }
   }
 }

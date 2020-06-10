@@ -1,14 +1,16 @@
 package wordPlay.handler;
 
+import java.io.IOException;
 import java.util.Vector;
+import wordPlay._exceptions.InvalidWordException;
 import wordPlay.metrics.MetricsCalculator;
 import wordPlay.util.FileProcessor;
 import wordPlay.util.Results;
 
 public class WordRotator {
-  FileProcessor fp;
-  MetricsCalculator metrics;
-  Results rs;
+  private final FileProcessor fp;
+  private final MetricsCalculator metrics;
+  private final Results rs;
 
   public WordRotator(FileProcessor fp, MetricsCalculator metrics, Results rs) {
     this.fp = fp;
@@ -24,7 +26,11 @@ public class WordRotator {
 
       while (word != null) {
         if (!word.equals("")) {
-          if (word.charAt((word.length()) - 1) == '.' || word.equals("\n")) {
+          if (!word.matches("\\w.*")) {
+            throw new InvalidWordException(
+                " ( " + word + " ) Please Ensure File contains Valid Words/Sentences");
+          }
+          if (word.charAt((word.length()) - 1) == '.') {
             word = word.substring(0, word.length() - 1);
             word = rotate(word, wordCount);
             lineStats.add(word.length());
@@ -47,24 +53,28 @@ public class WordRotator {
         }
         word = fp.poll();
       }
-    } catch (Exception e) {
-      System.out.println(
-          "exception" + e + " occurred in WordRotator class -> processFile function");
-      e.printStackTrace();
+    } catch (InvalidWordException e) {
+      System.out.println(e);
+      System.out.println("Terminating Program");
+      System.exit(1);
+    } catch (IOException e) {
+      System.out.println(e);
+      System.out.println("(poll() method) Terminating Program");
+      System.exit(1);
     }
   }
 
   private String rotate(String original, int rotation) {
     char[] temp = new char[original.length()];
 
-    if (original.length() % rotation == 0) {
+    if (rotation % original.length() == 0) {
       return original;
     } else {
       for (int i = 0; i < original.length(); i++) {
         int newIndex = (i + rotation) % original.length();
         temp[newIndex] = original.charAt(i);
       }
-      return String.valueOf(temp);
     }
+    return String.valueOf(temp);
   }
 }

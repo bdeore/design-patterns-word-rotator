@@ -40,7 +40,7 @@ public class MetricsCalculator {
     }
   }
 
-  private void calculateAvgWordsPerSentence() {
+  private void calculateAvgWordsPerSentence() throws ArithmeticException {
     int size = 0;
     for (Vector<Integer> tempReference : metrics) {
       size += tempReference.size();
@@ -49,7 +49,7 @@ public class MetricsCalculator {
     avgWordsPerSentence = roundUp(avgWordsPerSentence);
   }
 
-  private void calculateAvgWordLength() {
+  private void calculateAvgWordLength() throws ArithmeticException {
     int charCount = 0, wordCount = 0;
     for (Vector<Integer> tempReference : metrics) {
       wordCount += tempReference.size();

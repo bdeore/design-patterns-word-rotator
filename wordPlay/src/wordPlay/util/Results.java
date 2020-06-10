@@ -23,11 +23,18 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
       System.out.println(line);
     }
 
-    System.out.println("\nMetrics: ");
-    System.out.println("-----------------------------------");
-    System.out.println("AVG_NUM_WORDS_PER_SENTENCE - " + metrics.getAvgWordsPerSentence());
-    System.out.println("AVG_WORD_LENGTH - " + metrics.getAvgWordLength());
-    System.out.println("-----------------------------------");
+    try {
+      System.out.println("\nMetrics: ");
+      System.out.println("-----------------------------------");
+      System.out.println("AVG_NUM_WORDS_PER_SENTENCE - " + metrics.getAvgWordsPerSentence());
+      System.out.println("AVG_WORD_LENGTH - " + metrics.getAvgWordLength());
+      System.out.println("-----------------------------------");
+    } catch (ArithmeticException e) {
+      System.out.println(e);
+      System.out.println("(Class Results) Terminating Program");
+      e.printStackTrace();
+      System.exit(1);
+    }
   }
 
   @Override
@@ -43,9 +50,16 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
       }
       metrics_file.write("AVG_NUM_WORDS_PER_SENTENCE - " + metrics.getAvgWordsPerSentence() + "\n");
       metrics_file.write("AVG_WORD_LENGTH - " + metrics.getAvgWordLength());
+    } catch (ArithmeticException e) {
+      System.out.println(e);
+      System.out.println("(Class Results) Terminating Program");
+      e.printStackTrace();
+      System.exit(1);
     } catch (IOException e) {
       System.out.println("IOException Occurred");
       e.printStackTrace();
+      System.exit(1);
+
     } finally {
       try {
         if (output_file != null) output_file.close();
@@ -54,6 +68,7 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
       } catch (IOException e) {
         System.out.println("IOException Occurred");
         e.printStackTrace();
+        System.exit(1);
       }
     }
   }
