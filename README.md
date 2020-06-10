@@ -38,12 +38,8 @@ make sure input file is in the top-level directory (wordPlay/).
 Design of this assignment solution is based on principle of composition. rather than passing around
 large result arrays (which need to be copied, hence, expensive) we can pass object 
 references (with composition). Detailed design explanations can be found as comments
-in the respective classes. 
+in the respective classes. data structure: to store information for calculating metrics(word length, line numbers) I'm using vector of vectors of integers. as vectors grow dynamically at run time, this frees the program from any arbitrary hardcoded limits. to store the results of rotation, a vector of string objects is used. 
 
-data structure: to store information for calculating metrics(word length, line numbers) I'm using  
-vector of vectors of integers. as vectors grow dynamically at run time, this frees the program 
-from any arbitrary hardcoded limits.
-to store the results of rotation, a vector of string objects is used. 
 -----------------------------------------------------------------------
 ### Academic Honesty statement:
 -----------------------------------------------------------------------
