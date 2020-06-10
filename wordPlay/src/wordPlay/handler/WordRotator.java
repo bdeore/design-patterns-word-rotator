@@ -19,6 +19,8 @@ public class WordRotator {
   private final Results rs;
 
   /**
+   * parameterized constructor for WordRotator class
+   *
    * @param fp FileProcessor Object - to read words from the input file
    * @param metrics MetricsCalculator Object - to process metrics at the same time
    * @param rs Results Object - to store result of string rotation in the buffer. which can be used
@@ -86,7 +88,8 @@ public class WordRotator {
                     + " [ "
                     + word
                     + " ]"
-                    + "\nPlease Ensure File Contains Valid Words/Sentences");
+                    + "\nPlease Ensure File Contains Valid Words/Sentences"
+                    + "\nNote: only non-empty lines are used to calculate line number");
           }
         }
 
@@ -104,6 +107,8 @@ public class WordRotator {
   }
 
   /**
+   * utility function to rotate the string
+   *
    * @param original - word read from the file
    * @param rotation - amount of rotation(number of characters)
    * @return String - result of rotation
@@ -127,7 +132,11 @@ public class WordRotator {
     return String.valueOf(temp);
   }
 
-  /** @return String composed of fields from metrics and results objects */
+  /**
+   * toString() method for debugging purposes
+   *
+   * @return String composed of fields from metrics and results objects
+   */
   @Override
   public String toString() {
     return "\nWordRotator : \n" + "Metrics => " + metrics + "Results => " + rs;
