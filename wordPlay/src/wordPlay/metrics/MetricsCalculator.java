@@ -1,13 +1,13 @@
 package wordPlay.metrics;
 
 import java.util.Vector;
+import wordPlay._exceptions.EmptyInputFileException;
 
 public class MetricsCalculator {
 
+  private final Vector<Vector<Integer>> metrics;
   private double avgWordsPerSentence;
   private double avgWordLength;
-
-  private final Vector<Vector<Integer>> metrics;
 
   public MetricsCalculator() {
     this.avgWordsPerSentence = 0;
@@ -15,12 +15,18 @@ public class MetricsCalculator {
     metrics = new Vector<Vector<Integer>>();
   }
 
-  public double getAvgWordsPerSentence() {
+  public double getAvgWordsPerSentence() throws EmptyInputFileException {
     calculateAvgWordsPerSentence();
+    if (metrics.size() == 0) {
+      throw new EmptyInputFileException("Input File Is Empty");
+    }
     return avgWordsPerSentence;
   }
 
-  public double getAvgWordLength() {
+  public double getAvgWordLength() throws EmptyInputFileException {
+    if (metrics.size() == 0) {
+      throw new EmptyInputFileException("Input File Is Empty");
+    }
     calculateAvgWordLength();
     return avgWordLength;
   }
@@ -64,5 +70,20 @@ public class MetricsCalculator {
 
   private double roundUp(double value) {
     return ((double) Math.round(value * 100) / 100);
+  }
+
+  @Override
+  public String toString() {
+    try {
+      return "MetricsCalculator : \n"
+          + "avgWordsPerSentence => "
+          + getAvgWordsPerSentence()
+          + "\navgWordLength => "
+          + getAvgWordLength()
+          + "\n";
+    } catch (EmptyInputFileException e) {
+      e.printStackTrace();
+    }
+    return "";
   }
 }

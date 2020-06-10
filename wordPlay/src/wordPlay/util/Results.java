@@ -3,6 +3,7 @@ package wordPlay.util;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Vector;
+import wordPlay._exceptions.EmptyInputFileException;
 import wordPlay.metrics.MetricsCalculator;
 
 public class Results implements FileDisplayInterface, StdoutDisplayInterface {
@@ -17,22 +18,22 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 
   @Override
   public void write() {
-    System.out.println("\nOutput: ");
-    System.out.println("-----------------------------------");
-    for (String line : resultBuffer) {
-      System.out.println(line);
-    }
-
     try {
       System.out.println("\nMetrics: ");
       System.out.println("-----------------------------------");
       System.out.println("AVG_NUM_WORDS_PER_SENTENCE - " + metrics.getAvgWordsPerSentence());
       System.out.println("AVG_WORD_LENGTH - " + metrics.getAvgWordLength());
+
+      System.out.println("\nOutput: ");
       System.out.println("-----------------------------------");
-    } catch (ArithmeticException e) {
+      for (String line : resultBuffer) {
+        System.out.println(line);
+      }
+      System.out.println("-----------------------------------");
+    } catch (EmptyInputFileException | ArithmeticException e) {
       System.out.println(e);
       System.out.println("(Class Results) Terminating Program");
-      e.printStackTrace();
+      // e.printStackTrace();
       System.exit(1);
     }
   }
@@ -50,14 +51,14 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
       }
       metrics_file.write("AVG_NUM_WORDS_PER_SENTENCE - " + metrics.getAvgWordsPerSentence() + "\n");
       metrics_file.write("AVG_WORD_LENGTH - " + metrics.getAvgWordLength());
-    } catch (ArithmeticException e) {
+    } catch (EmptyInputFileException | ArithmeticException e) {
       System.out.println(e);
       System.out.println("(Class Results) Terminating Program");
-      e.printStackTrace();
+      // e.printStackTrace();
       System.exit(1);
     } catch (IOException e) {
       System.out.println("IOException Occurred");
-      e.printStackTrace();
+      // e.printStackTrace();
       System.exit(1);
 
     } finally {
@@ -75,5 +76,10 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 
   public void store(String line) {
     resultBuffer.add(line);
+  }
+
+  @Override
+  public String toString() {
+    return "\nResults : \n" + "resultBuffer => " + resultBuffer + "\nmetrics => " + metrics;
   }
 }

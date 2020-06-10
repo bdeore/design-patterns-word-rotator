@@ -77,4 +77,9 @@ public class WordRotator {
     }
     return String.valueOf(temp);
   }
+
+  @Override
+  public String toString() {
+    return "\nWordRotator : \n" + "Metrics => " + metrics + "Results => " + rs;
+  }
 }

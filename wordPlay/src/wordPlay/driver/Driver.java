@@ -10,6 +10,7 @@ import wordPlay.util.Results;
 
 /** @author Bhagwan Deore */
 public class Driver {
+
   public static void main(String[] args) {
 
     /*
@@ -27,13 +28,13 @@ public class Driver {
     System.out.println("Hello World! Lets get started with the assignment");
 
     try {
+
       FileProcessor fp = new FileProcessor(args[0]);
       MetricsCalculator metrics = new MetricsCalculator();
       Results rs = new Results(metrics);
 
       WordRotator wr = new WordRotator(fp, metrics, rs);
       wr.processFile();
-      metrics.printVector();
 
       rs.write();
       rs.write("output.txt", "metrics.txt");
@@ -41,12 +42,17 @@ public class Driver {
     } catch (InvalidPathException | FileNotFoundException | SecurityException e) {
       System.out.println(e);
       System.out.println("(Class Driver) Terminating Program");
-      e.printStackTrace();
       System.exit(1);
+      // e.printStackTrace();
     } catch (IOException e) {
       System.out.println("IOException occurred in FileProcessor class\n" + e);
-      e.printStackTrace();
       System.exit(1);
+      // e.printStackTrace();
     }
+  }
+
+  @Override
+  public String toString() {
+    return "Driver Object";
   }
 }
