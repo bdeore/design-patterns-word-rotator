@@ -50,7 +50,8 @@ public class Driver {
       wr.processFile();
 
       /*
-       * Results object provide uniform interface generating output
+       * Results object provides uniform interface through write() method for writing output to
+       * files as well as standard out
        *
        *  write() method without any parameters prints output and metrics to the console
        *  write(output_file_name, metrics_file_name) writes output and metrics to specified
