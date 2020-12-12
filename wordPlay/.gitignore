@@ -13,8 +13,13 @@
 /Assignment1.iml
 # Test Files
 /wordPlay/metrics.txt
-/input.txt
+/submission/csx42-summer-2020-assign1-bdeore/input.txt
 /wordPlay/output.txt
-/output.txt
+/submission/csx42-summer-2020-assign1-bdeore/output.txt
+/submission/csx42-summer-2020-assign1-bdeore/metrics.txt
+/submission/csx42-summer-2020-assign1-bdeore/input.txt
+/wordPlay/src/wordPlay/metrics/MetricsCalculatorTest.java
+/lines_committed.rtf
+/submission/
 /metrics.txt
-/input.txt
+/output.txt
